@@ -15,6 +15,16 @@ public class Client extends BaseEntite {
     public Client() {
     }
 
+    @Override
+    public boolean equals( Client cli) {
+    	if( ( this.nom.equals( cli.nom)) && ( this.nom.equals( cli.nom))){
+    		return true;
+    		
+    	}else {
+    		return false;
+    	}
+    }
+    
     public Client(String nom, String prenoms) {
         this.nom = nom;
         this.prenoms = prenoms;

@@ -10,63 +10,104 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-
 @Entity
 public class Reservation extends BaseEntite {
-	
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
-    
 
-    @ManyToOne
-	@JoinColumn( name="res_client")
-    private Client client;
-    
-    @ManyToMany
-	@JoinTable(	name="reservation_chambre", 
-				joinColumns= @JoinColumn(name="res_id", referencedColumnName="uuid"),	
-				inverseJoinColumns = @JoinColumn(name="cli_id", referencedColumnName="uuid"))
-    private List<Chambre> chambres = new ArrayList<>();
+	private LocalDate dateDebut;
+	private LocalDate dateFin;
 
-    public Reservation() {
-    }
+	@ManyToOne
+	@JoinColumn(name = "res_client")
+	private Client client;
 
-    public Reservation(LocalDate dateDebut, LocalDate dateFin, Client client, List<Chambre> chambres) {
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.client = client;
-        this.chambres = chambres;
-    }
+	@ManyToMany
+	@JoinTable(name = "reservation_chambre", joinColumns = @JoinColumn(name = "res_id", referencedColumnName = "uuid"), inverseJoinColumns = @JoinColumn(name = "cli_id", referencedColumnName = "uuid"))
+	private List<Chambre> chambres = new ArrayList<>();
 
-    public LocalDate getDateDebut() {
-        return dateDebut;
-    }
+	public Reservation() {
+	}
 
-    public void setDateDebut(LocalDate dateDebut) {
-        this.dateDebut = dateDebut;
-    }
+	public Reservation(LocalDate dateDebut, LocalDate dateFin, Client client, List<Chambre> chambres) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.client = client;
+		this.chambres = chambres;
+	}
 
-    public LocalDate getDateFin() {
-        return dateFin;
-    }
+	/**
+	 * Getter
+	 * 
+	 * @return the dateDebut
+	 */
+	public LocalDate getDateDebut() {
+		return dateDebut;
+	}
 
-    public void setDateFin(LocalDate dateFin) {
-        this.dateFin = dateFin;
-    }
+	/**
+	 * Setter
+	 * 
+	 * @param dateDebut the dateDebut to set
+	 */
+	public void setDateDebut(LocalDate dateDebut) {
+		this.dateDebut = dateDebut;
+	}
 
-    public Client getClient() {
-        return client;
-    }
+	/**
+	 * Getter
+	 * 
+	 * @return the dateFin
+	 */
+	public LocalDate getDateFin() {
+		return dateFin;
+	}
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
+	/**
+	 * Setter
+	 * 
+	 * @param dateFin the dateFin to set
+	 */
+	public void setDateFin(LocalDate dateFin) {
+		this.dateFin = dateFin;
+	}
 
-    public List<Chambre> getChambres() {
-        return chambres;
-    }
+	/**
+	 * Getter
+	 * 
+	 * @return the client
+	 */
+	public Client getClient() {
+		return client;
+	}
 
-    public void setChambres(List<Chambre> chambres) {
-        this.chambres = chambres;
-    }
+	/**
+	 * Setter
+	 * 
+	 * @param client the client to set
+	 */
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return the chambres
+	 */
+	public List<Chambre> getChambres() {
+		return chambres;
+	}
+
+	/**
+	 * Setter
+	 * 
+	 * @param chambres the chambres to set
+	 */
+	public void setChambres(List<Chambre> chambres) {
+		this.chambres = chambres;
+	}
+
+	// @OneToMany(mappedBy = "chambres")
+	// private List<String> chambres = new ArrayList<>();
+
 }

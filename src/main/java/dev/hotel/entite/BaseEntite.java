@@ -2,25 +2,32 @@ package dev.hotel.entite;
 
 import java.util.UUID;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.Type;
 
 @MappedSuperclass
 public class BaseEntite {
 
 	@Id
-    private UUID uuid;
+	@Type(type = "uuid-char")
+	private UUID uuid;
 
-    public BaseEntite() {
-        this.uuid = UUID.randomUUID();
-    }
+	public BaseEntite() {
+		this.uuid = UUID.randomUUID();
+	}
 
-    public UUID getUuid() {
-        return uuid;
-    }
+	public UUID getUuid() {
+		return uuid;
+	}
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	public boolean equals(Client cli) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

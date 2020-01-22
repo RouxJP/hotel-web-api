@@ -1,16 +1,13 @@
 package dev.hotel.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,10 +69,20 @@ public class ClientsController {
 
 	// Récupérer un objet Client au format JSON par exemple
 	@RequestMapping(value = "/insClient2", method = RequestMethod.POST)
-	public void create(@RequestBody Client client, HttpServletResponse response) {
-		LOG.info("debut");		
+	public void create(@RequestBody Client client, HttpServletResponse response) throws IOException {
+
 		LOG.info("Objet client : " + client.getNom());
-		clientRepository.save(client);
+		LOG.info("Objet client : " + client.getPrenoms());
+
+		Client clientBd = clientRepository.findClientByNomAndPrenoms(client.getNom(), client.getPrenoms());
+		if (clientBd != null) {
+			LOG.info("Le client existe déja");
+			response.sendError(400, "Le client existe déja");
+
+		} else {
+			LOG.info("Le client n'existe déja on le crée");
+			clientRepository.save(client);
+		}
 
 	}
 
