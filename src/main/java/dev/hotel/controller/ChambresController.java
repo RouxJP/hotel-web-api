@@ -1,6 +1,5 @@
 package dev.hotel.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -28,7 +27,10 @@ public class ChambresController {
 	@RequestMapping(value = "/chambres", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Chambre> findChambre() {
-		List<Chambre> lstChambres = new ArrayList<Chambre>();
+		LOG.info( "Liste de chambres");
+		for( Chambre chambre : chambreRepository.findAll()) {
+			LOG.info( " - chambres n° : " + chambre.getNumero() + " surface : " + chambre.getSurfaceEnM2());
+		}
 		return chambreRepository.findAll();
 	}
 
