@@ -1,27 +1,30 @@
 package dev.hotel.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.hotel.entite.Client;
 import dev.hotel.repository.ClientRepository;
+import dev.hotel.service.ClientService;
 
 @RestController
+@RequestMapping("clients")
 public class ClientsController {
 	public static final Logger LOG = LoggerFactory.getLogger(ClientsController.class);
 
+	private ClientService clientService;
+	
 	// @Autowired
 	private ClientRepository clientRepository;
 
@@ -29,7 +32,25 @@ public class ClientsController {
 		super();
 		this.clientRepository = clientRepository;
 	}
+/**
+	@RequestMapping(value = "/clients", method = RequestMethod.GET)
+	@ResponseBody // parser l'objet Client
+	public List<Client> findClients() {
+		// List<Client> lstClients = new ArrayList<Client>();
+		// lstClients = Arrays.asList( new Client ("Pierre", "Jean"), new Client
+		// ("Albert", "Dimitri") );
+		// return lstClients;
 
+		return clientRepository.findAll();
+
+	}
+**/
+	@GetMapping(params = "nom")
+	public List<Client> rechercherParNom(@RequestParam("nom") String nomRequete) {
+		return this.clientService.findByNom(nomRequete);
+	}
+	
+	/**
 	@RequestMapping(value = "/client", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Client> findClient(@RequestParam("nom") String nom) {
@@ -43,19 +64,14 @@ public class ClientsController {
 		}
 		return lstClients;
 	}
-
-	@RequestMapping(value = "/clients", method = RequestMethod.GET)
-	@ResponseBody // parser l'objet Client
-	public List<Client> findClients() {
-		// List<Client> lstClients = new ArrayList<Client>();
-		// lstClients = Arrays.asList( new Client ("Pierre", "Jean"), new Client
-		// ("Albert", "Dimitri") );
-		// return lstClients;
-
-		return clientRepository.findAll();
-
+**/	
+	@GetMapping
+	public List<Client> listerClients() {
+		return this.clientService.listerClients();
 	}
-
+	
+/**	
+	
 	@RequestMapping(value = "/insClient1", method = RequestMethod.POST)
 	@ResponseBody
 	public void insereClient(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom) {
@@ -85,5 +101,11 @@ public class ClientsController {
 		}
 
 	}
+**/	
+	@PostMapping
+	public UUID creerClient(@RequestBody @Valid Client clientRecu) {
+		return this.clientService.creerClient(clientRecu);
+	}
 
+	
 }

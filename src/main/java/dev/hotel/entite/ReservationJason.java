@@ -1,84 +1,77 @@
 package dev.hotel.entite;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
 public class ReservationJason {
+	
+	@Future
+	@NotNull
 	private LocalDate dateDebut;
+	
+	@Future
+	@NotNull
 	private LocalDate dateFin;
+/**	
 	private String clientId;
-	List<String> chambres;
-
-	/**
-	 * Getter
-	 * 
+	private List<String> chambres;
+**/
+	@NotNull
+	private UUID clientId;
+	private List<@NotNull UUID> chambres = new ArrayList<>();
+	/** Getter
 	 * @return the dateDebut
 	 */
 	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
-
-	/**
-	 * Setter
-	 * 
+	/** Setter
 	 * @param dateDebut the dateDebut to set
 	 */
 	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-
-	/**
-	 * Getter
-	 * 
+	/** Getter
 	 * @return the dateFin
 	 */
 	public LocalDate getDateFin() {
 		return dateFin;
 	}
-
-	/**
-	 * Setter
-	 * 
+	/** Setter
 	 * @param dateFin the dateFin to set
 	 */
 	public void setDateFin(LocalDate dateFin) {
 		this.dateFin = dateFin;
 	}
-
-	/**
-	 * Getter
-	 * 
+	/** Getter
 	 * @return the clientId
 	 */
-	public String getClientId() {
+	public UUID getClientId() {
 		return clientId;
 	}
-
-	/**
-	 * Setter
-	 * 
+	/** Setter
 	 * @param clientId the clientId to set
 	 */
-	public void setClientId(String clientId) {
+	public void setClientId(UUID clientId) {
 		this.clientId = clientId;
 	}
-
-	/**
-	 * Getter
-	 * 
+	/** Getter
 	 * @return the chambres
 	 */
-	public List<String> getChambres() {
+	public List<UUID> getChambres() {
 		return chambres;
 	}
-
-	/**
-	 * Setter
-	 * 
+	/** Setter
 	 * @param chambres the chambres to set
 	 */
-	public void setChambres(List<String> chambres) {
+	public void setChambres(List<UUID> chambres) {
 		this.chambres = chambres;
 	}
+	
 
 }
