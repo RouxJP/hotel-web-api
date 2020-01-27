@@ -58,7 +58,7 @@ public class ReservationController {
 		}
 
 		Optional<Client> clientOpt = clientRepository.findById(UUID.fromString(reservationJason.getClientId()));
-		if (clientOpt.isEmpty()) {
+		if (!clientOpt.isPresent()) {
 			LOG.info("Le client n'existe pas");
 			response.sendError(400, "Le client n'existe pas");
 
