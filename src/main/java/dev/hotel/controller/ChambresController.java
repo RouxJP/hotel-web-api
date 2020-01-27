@@ -31,7 +31,7 @@ public class ChambresController {
 		for( Chambre chambre : chambreRepository.findAll()) {
 			LOG.info( " - chambres n° : " + chambre.getNumero() + " surface : " + chambre.getSurfaceEnM2());
 		}
-		return chambreRepository.findAll();
+		return chambreRepository.findAll(); 
 	}
 
 }
