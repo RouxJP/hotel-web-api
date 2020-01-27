@@ -9,6 +9,8 @@ import javax.persistence.EntityNotFoundException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import dev.hotel.entite.Chambre;
@@ -46,13 +48,13 @@ public class Startup {
 		this.reservationRepository = reservationRepository;
 	}
 
-	//@EventListener(ContextRefreshedEvent.class)
+	@EventListener(ContextRefreshedEvent.class)
 
 	public void init() {
 
 		LOG.info("Démarrage de l'application");
 
-		if (this.clientRepository.count() == 0) {
+		if (this.clientRepository.count() == 1) {
 
 			List<Client> clients = new ArrayList<Client>();
 			clients.add(new Client("Pierre", "Jean"));
