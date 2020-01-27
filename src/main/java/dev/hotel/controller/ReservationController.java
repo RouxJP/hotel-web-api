@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.hotel.entite.Reservation;
 import dev.hotel.entite.ReservationJason;
-import dev.hotel.repository.ChambreRepository;
-import dev.hotel.repository.ClientRepository;
-import dev.hotel.repository.ReservationRepository;
 import dev.hotel.service.ReservationService;
 
 @RestController
@@ -32,6 +28,7 @@ public class ReservationController {
 	private ReservationService reservationService;
 
 	// @Autowired
+/**	
 	private ReservationRepository reservationRepository;
 
 	@Autowired
@@ -44,6 +41,12 @@ public class ReservationController {
 		super();
 		this.reservationRepository = reservationRepository;
 	}
+**/
+	public ReservationController(ReservationService reservationService) {
+		super();
+		this.reservationService = reservationService;
+	}
+	
 /**
 	@RequestMapping(value = "/reservations", method = RequestMethod.GET)
 	@ResponseBody 

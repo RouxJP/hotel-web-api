@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.hotel.entite.Client;
-import dev.hotel.repository.ClientRepository;
 import dev.hotel.service.ClientService;
 
 @RestController
@@ -23,8 +22,7 @@ import dev.hotel.service.ClientService;
 public class ClientsController {
 	public static final Logger LOG = LoggerFactory.getLogger(ClientsController.class);
 
-	private ClientService clientService;
-	
+	/**	
 	// @Autowired
 	private ClientRepository clientRepository;
 
@@ -32,6 +30,16 @@ public class ClientsController {
 		super();
 		this.clientRepository = clientRepository;
 	}
+	**/
+	private ClientService clientService;
+
+	public ClientsController(ClientService clientService) {
+		super();
+		this.clientService = clientService;
+	}
+
+
+
 /**
 	@RequestMapping(value = "/clients", method = RequestMethod.GET)
 	@ResponseBody // parser l'objet Client
