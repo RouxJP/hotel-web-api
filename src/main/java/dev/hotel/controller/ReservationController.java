@@ -66,7 +66,7 @@ public class ReservationController {
 
 		for (String chambre : reservationJason.getChambres()) {
 			Optional<Chambre> chambreOpt = chambreRepository.findById(UUID.fromString(chambre));
-			if (chambreOpt.isEmpty()) {
+			if (!chambreOpt.isPresent()) {
 				String message = "La chambre " + chambre + " n'existe pas";
 				LOG.info(message);
 				response.sendError(400, message);
